@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="178dp"
+        android:layout_marginTop="168dp"
         android:gravity="center"
         android:orientation="horizontal">
     </LinearLayout>

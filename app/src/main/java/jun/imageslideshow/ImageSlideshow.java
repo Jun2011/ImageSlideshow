@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,9 +27,7 @@ import java.util.List;
  */
 public class ImageSlideshow extends FrameLayout {
 
-    private static final int NORMAL = 0;
-    private static final int lARGE = 1;
-    private static final int SMALL = 2;
+    private static final String TAG = "ImageSlideshow";
 
     private Context context;
     private View contentView;
@@ -42,6 +41,9 @@ public class ImageSlideshow extends FrameLayout {
     private Animator animatorToLarge;
     private Animator animatorToSmall;
     private SparseBooleanArray isLarge;
+    private List<ImageTitleBean> imageTitleBeanList;
+    private int dotSize = 16;
+    private int dotSpace = 16;
 
     public ImageSlideshow(Context context) {
         this(context, null);
@@ -58,6 +60,12 @@ public class ImageSlideshow extends FrameLayout {
         initView();
         // 初始化Animator
         initAnimator();
+        // 初始化数据
+        initData();
+    }
+
+    private void initData() {
+        imageTitleBeanList = new ArrayList<>();
     }
 
     private void initAnimator() {
@@ -74,7 +82,46 @@ public class ImageSlideshow extends FrameLayout {
         llDot = (LinearLayout) findViewById(R.id.ll_dot);
     }
 
-    public void setImageTitleData(List<ImageTitleBean> imageTitleBeanList) {
+    // 设置小圆点的大小
+    public void setDotSize(int dotSize) {
+        this.dotSize = dotSize;
+    }
+
+    // 设置小圆点的间距
+    public void setDotSpace(int dotSpace) {
+        this.dotSpace = dotSpace;
+    }
+
+    // 添加图片
+    public void addImageUrl(String imageUrl) {
+        ImageTitleBean imageTitleBean = new ImageTitleBean();
+        imageTitleBean.setImageUrl(imageUrl);
+        imageTitleBeanList.add(imageTitleBean);
+    }
+
+    // 添加图片和标题
+    public void addImageTitle(String imageUrl, String title) {
+        ImageTitleBean imageTitleBean = new ImageTitleBean();
+        imageTitleBean.setImageUrl(imageUrl);
+        imageTitleBean.setTitle(title);
+        imageTitleBeanList.add(imageTitleBean);
+    }
+
+    // 添加图片和标题的JavaBean
+    public void addImageTitleBean(ImageTitleBean imageTitleBean) {
+        imageTitleBeanList.add(imageTitleBean);
+    }
+
+    // 设置图片和标题的JavaBean数据列表
+    public void setImageTitleBeanList(List<ImageTitleBean> imageTitleBeanList) {
+        this.imageTitleBeanList = imageTitleBeanList;
+    }
+
+    // 设置完后最终提交
+    public void commit() {
+        if (imageTitleBeanList == null) {
+            Log.e(TAG, "必须传入数据");
+        }
         count = imageTitleBeanList.size();
         // 设置ViewPager
         setViewPager(imageTitleBeanList);
@@ -92,11 +139,11 @@ public class ImageSlideshow extends FrameLayout {
         for (int i = 0; i < count; i++) {
             View view = new View(context);
             view.setBackgroundResource(R.drawable.dot_unselected);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(16, 16);
-            layoutParams.leftMargin = 16;
-            layoutParams.rightMargin = 16;
-            layoutParams.topMargin = 16;
-            layoutParams.bottomMargin = 16;
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(dotSize, dotSize);
+            layoutParams.leftMargin = dotSpace / 2;
+            layoutParams.rightMargin = dotSpace / 2;
+            layoutParams.topMargin = dotSpace / 2;
+            layoutParams.bottomMargin = dotSpace / 2;
             llDot.addView(view, layoutParams);
             isLarge.put(i, false);
         }
@@ -110,9 +157,14 @@ public class ImageSlideshow extends FrameLayout {
      * 开始自动播放图片
      */
     private void starPlay() {
-        isAutoPlay = true;
-        handler = new Handler();
-        handler.postDelayed(task, 3000);
+        // 如果少于2张就不用自动播放了
+        if (count < 2) {
+            isAutoPlay = false;
+        } else {
+            isAutoPlay = true;
+            handler = new Handler();
+            handler.postDelayed(task, 3000);
+        }
     }
 
     private Runnable task = new Runnable() {

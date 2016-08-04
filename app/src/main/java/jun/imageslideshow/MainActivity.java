@@ -1,7 +1,7 @@
 package jun.imageslideshow;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import java.util.ArrayList;
@@ -10,7 +10,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ImageSlideshow imageSlideshow;
-    private List<ImageTitleBean> imageTitleBeanList;
+    private List<String> imageUrlList;
+    private List<String> titleList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +20,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         imageSlideshow = (ImageSlideshow) findViewById(R.id.is_gallery);
+        imageUrlList = new ArrayList<>();
+        titleList = new ArrayList<>();
 
         // 初始化数据
         initData();
+
         // 为ImageSlideshow设置数据
-        imageSlideshow.setImageTitleData(imageTitleBeanList);
+        imageSlideshow.setDotSpace(16);
+        imageSlideshow.setDotSize(16);
+        imageSlideshow.commit();
     }
 
     /**
@@ -40,12 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 "学做这些冰冰凉凉的下酒宵夜，简单又方便",
                 "知乎好问题 · 有什么冷门、小众的爱好？",
                 "欧洲都这么发达了，怎么人均收入还比美国低"};
-        imageTitleBeanList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            ImageTitleBean imageTitleBean = new ImageTitleBean();
-            imageTitleBean.setImageUrl(imageUrls[i]);
-            imageTitleBean.setTitle(titles[i]);
-            imageTitleBeanList.add(imageTitleBean);
+            imageSlideshow.addImageTitle(imageUrls[i], titles[i]);
         }
     }
 
