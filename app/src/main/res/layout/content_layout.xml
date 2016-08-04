@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_image_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--自定义Indicator-->
+    <LinearLayout
+        android:id="@+id/ll_dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="178dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="16dp">
+    </LinearLayout>
+</merge>
