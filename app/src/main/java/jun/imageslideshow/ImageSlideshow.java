@@ -1,10 +1,13 @@
 package jun.imageslideshow;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +26,9 @@ import java.util.List;
  */
 public class ImageSlideshow extends FrameLayout {
 
-    private static final int UPDATE_VIEWPAGER = 0;
+    private static final int NORMAL = 0;
+    private static final int lARGE = 1;
+    private static final int SMALL = 2;
 
     private Context context;
     private View contentView;
@@ -34,6 +39,9 @@ public class ImageSlideshow extends FrameLayout {
     private boolean isAutoPlay;
     private Handler handler;
     private int currentItem;
+    private Animator animatorToLarge;
+    private Animator animatorToSmall;
+    private SparseBooleanArray isLarge;
 
     public ImageSlideshow(Context context) {
         this(context, null);
@@ -45,11 +53,16 @@ public class ImageSlideshow extends FrameLayout {
 
     public ImageSlideshow(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         this.context = context;
-
         // 初始化View
         initView();
+        // 初始化Animator
+        initAnimator();
+    }
+
+    private void initAnimator() {
+        animatorToLarge = AnimatorInflater.loadAnimator(context, R.animator.scale_to_large);
+        animatorToSmall = AnimatorInflater.loadAnimator(context, R.animator.scale_to_small);
     }
 
     /**
@@ -75,15 +88,22 @@ public class ImageSlideshow extends FrameLayout {
      * 设置指示器
      */
     private void setIndicator() {
+        isLarge = new SparseBooleanArray();
         for (int i = 0; i < count; i++) {
             View view = new View(context);
             view.setBackgroundResource(R.drawable.dot_unselected);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(16, 16);
-            layoutParams.leftMargin = 8;
-            layoutParams.rightMargin = 8;
+            layoutParams.leftMargin = 16;
+            layoutParams.rightMargin = 16;
+            layoutParams.topMargin = 16;
+            layoutParams.bottomMargin = 16;
             llDot.addView(view, layoutParams);
+            isLarge.put(i, false);
         }
         llDot.getChildAt(0).setBackgroundResource(R.drawable.dot_selected);
+        animatorToLarge.setTarget(llDot.getChildAt(0));
+        animatorToLarge.start();
+        isLarge.put(0, true);
     }
 
     /**
@@ -143,6 +163,9 @@ public class ImageSlideshow extends FrameLayout {
         // 设置View列表
         setViewList(imageTitleBeanList);
         vpImageTitle.setAdapter(new ImageTitlePagerAdapter());
+        // 从第1张图片开始（位置刚好也是1，注意：0位置现在是最后一张图片）
+        currentItem = 1;
+        vpImageTitle.setCurrentItem(1);
         vpImageTitle.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -154,8 +177,18 @@ public class ImageSlideshow extends FrameLayout {
                 for (int i = 0; i < llDot.getChildCount(); i++) {
                     if (i == position - 1) {// 被选中
                         llDot.getChildAt(i).setBackgroundResource(R.drawable.dot_selected);
+                        if (!isLarge.get(i)) {
+                            animatorToLarge.setTarget(llDot.getChildAt(i));
+                            animatorToLarge.start();
+                            isLarge.put(i, true);
+                        }
                     } else {// 未被选中
                         llDot.getChildAt(i).setBackgroundResource(R.drawable.dot_unselected);
+                        if (isLarge.get(i)) {
+                            animatorToSmall.setTarget(llDot.getChildAt(i));
+                            animatorToSmall.start();
+                            isLarge.put(i, false);
+                        }
                     }
                 }
             }

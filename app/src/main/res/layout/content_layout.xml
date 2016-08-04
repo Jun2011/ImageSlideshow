@@ -16,7 +16,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="178dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:orientation="horizontal">
     </LinearLayout>
 </merge>
