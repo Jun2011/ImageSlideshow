@@ -119,16 +119,17 @@ public class ImageSlideshow extends FrameLayout {
 
     // 设置完后最终提交
     public void commit() {
-        if (imageTitleBeanList == null) {
-            Log.e(TAG, "必须传入数据");
+        if (imageTitleBeanList != null) {
+            count = imageTitleBeanList.size();
+            // 设置ViewPager
+            setViewPager(imageTitleBeanList);
+            // 设置指示器
+            setIndicator();
+            // 开始播放
+            starPlay();
+        } else {
+            Log.e(TAG, "数据为空");
         }
-        count = imageTitleBeanList.size();
-        // 设置ViewPager
-        setViewPager(imageTitleBeanList);
-        // 设置指示器
-        setIndicator();
-        // 开始播放
-        starPlay();
     }
 
     /**
@@ -136,6 +137,8 @@ public class ImageSlideshow extends FrameLayout {
      */
     private void setIndicator() {
         isLarge = new SparseBooleanArray();
+        // 记得创建前先清空数据，否则会受遗留数据的影响。
+        llDot.removeAllViews();
         for (int i = 0; i < count; i++) {
             View view = new View(context);
             view.setBackgroundResource(R.drawable.dot_unselected);
