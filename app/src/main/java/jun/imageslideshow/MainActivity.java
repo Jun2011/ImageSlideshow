@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         // 为ImageSlideshow设置数据
         imageSlideshow.setDotSpace(12);
         imageSlideshow.setDotSize(12);
+        imageSlideshow.setDelay(1000);
         imageSlideshow.setOnItemClickListener(new ImageSlideshow.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

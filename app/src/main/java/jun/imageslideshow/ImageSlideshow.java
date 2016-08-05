@@ -44,6 +44,7 @@ public class ImageSlideshow extends FrameLayout {
     private List<ImageTitleBean> imageTitleBeanList;
     private int dotSize = 12;
     private int dotSpace = 12;
+    private int delay = 3000;
 
     public ImageSlideshow(Context context) {
         this(context, null);
@@ -90,6 +91,10 @@ public class ImageSlideshow extends FrameLayout {
     // 设置小圆点的间距
     public void setDotSpace(int dotSpace) {
         this.dotSpace = dotSpace;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 
     // 添加图片
@@ -166,7 +171,7 @@ public class ImageSlideshow extends FrameLayout {
         } else {
             isAutoPlay = true;
             handler = new Handler();
-            handler.postDelayed(task, 3000);
+            handler.postDelayed(task, delay);
         }
     }
 
@@ -178,7 +183,7 @@ public class ImageSlideshow extends FrameLayout {
                 currentItem = currentItem % (count + 1) + 1;
                 // 正常每隔3秒播放一张图片
                 vpImageTitle.setCurrentItem(currentItem);
-                handler.postDelayed(task, 3000);
+                handler.postDelayed(task, delay);
             } else {
                 // 如果处于拖拽状态停止自动播放，会每隔5秒检查一次是否可以正常自动播放。
                 handler.postDelayed(task, 5000);
@@ -213,6 +218,7 @@ public class ImageSlideshow extends FrameLayout {
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
             View view = viewList.get(position);
+            // 设置Item的点击监听器
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
