@@ -95,6 +95,7 @@ public class ImageSlideshow extends FrameLayout {
         this.dotSpace = dotSpace;
     }
 
+    // 设置图片轮播间隔时间
     public void setDelay(int delay) {
         this.delay = delay;
     }
