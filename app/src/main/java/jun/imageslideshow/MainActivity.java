@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         initData();
 
         // 为ImageSlideshow设置数据
-        imageSlideshow.setDotSpace(16);
-        imageSlideshow.setDotSize(16);
+        imageSlideshow.setDotSpace(12);
+        imageSlideshow.setDotSize(12);
         imageSlideshow.commit();
     }
 

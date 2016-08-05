@@ -42,8 +42,8 @@ public class ImageSlideshow extends FrameLayout {
     private Animator animatorToSmall;
     private SparseBooleanArray isLarge;
     private List<ImageTitleBean> imageTitleBeanList;
-    private int dotSize = 16;
-    private int dotSpace = 16;
+    private int dotSize = 12;
+    private int dotSpace = 12;
 
     public ImageSlideshow(Context context) {
         this(context, null);
@@ -77,7 +77,7 @@ public class ImageSlideshow extends FrameLayout {
      * 初始化View
      */
     private void initView() {
-        contentView = LayoutInflater.from(context).inflate(R.layout.content_layout, this, true);
+        contentView = LayoutInflater.from(context).inflate(R.layout.is_main_layout, this, true);
         vpImageTitle = (ViewPager) findViewById(R.id.vp_image_title);
         llDot = (LinearLayout) findViewById(R.id.ll_dot);
     }
@@ -283,7 +283,7 @@ public class ImageSlideshow extends FrameLayout {
     private void setViewList(List<ImageTitleBean> imageTitleBeanList) {
         viewList = new ArrayList<>();
         for (int i = 0; i < count + 2; i++) {
-            View view = LayoutInflater.from(context).inflate(R.layout.image_title_layout, null);
+            View view = LayoutInflater.from(context).inflate(R.layout.is_image_title_layout, null);
             ImageView ivImage = (ImageView) view.findViewById(R.id.iv_image);
             TextView tvTitle = (TextView) view.findViewById(R.id.tv_title);
             if (i == 0) {// 将最前面一页设置成本来最后的那页

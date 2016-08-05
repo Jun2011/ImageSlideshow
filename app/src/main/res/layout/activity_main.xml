@@ -7,5 +7,5 @@
     <jun.imageslideshow.ImageSlideshow
         android:id="@+id/is_gallery"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="212dp"/>
 </FrameLayout>
