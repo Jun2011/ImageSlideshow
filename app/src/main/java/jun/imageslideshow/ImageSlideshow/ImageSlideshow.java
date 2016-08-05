@@ -1,4 +1,4 @@
-package jun.imageslideshow;
+package jun.imageslideshow.ImageSlideshow;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -21,6 +21,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jun.imageslideshow.R;
 
 /**
  * Created by Jun on 2016/8/4.

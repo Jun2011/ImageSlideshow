@@ -1,4 +1,4 @@
-package jun.imageslideshow;
+package jun.imageslideshow.test;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.view.Window;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jun.imageslideshow.ImageSlideshow.ImageSlideshow;
+import jun.imageslideshow.R;
 
 public class MainActivity extends AppCompatActivity {
 

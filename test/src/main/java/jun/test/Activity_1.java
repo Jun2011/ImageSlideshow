@@ -1,4 +1,4 @@
-package jun.imageslideshow;
+package jun.test;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package jun.imageslideshow;
+package jun.imageslideshow.ImageSlideshow;
 
 /**
  * Created by Jun on 2016/8/4.

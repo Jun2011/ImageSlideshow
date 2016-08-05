@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <jun.imageslideshow.ImageSlideshow
+    <jun.imageslideshow.ImageSlideshow.ImageSlideshow
         android:id="@+id/is_gallery"
         android:layout_width="match_parent"
         android:layout_height="212dp"/>

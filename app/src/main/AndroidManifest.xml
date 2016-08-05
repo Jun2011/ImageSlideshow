@@ -11,18 +11,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".test.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Activity_1"/>
-        <activity android:name=".Activity_2"/>
-        <activity android:name=".Activity_3"/>
-        <activity android:name=".Activity_4"/>
-        <activity android:name=".Activity_5"/>
+        <activity android:name=".test.Activity_1"/>
+        <activity android:name=".test.Activity_2"/>
+        <activity android:name=".test.Activity_3"/>
+        <activity android:name=".test.Activity_4"/>
+        <activity android:name=".test.Activity_5"/>
     </application>
 
 </manifest>
