@@ -1,7 +1,9 @@
 package jun.imageslideshow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 
 import java.util.ArrayList;
@@ -29,6 +31,28 @@ public class MainActivity extends AppCompatActivity {
         // 为ImageSlideshow设置数据
         imageSlideshow.setDotSpace(12);
         imageSlideshow.setDotSize(12);
+        imageSlideshow.setOnItemClickListener(new ImageSlideshow.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                switch (position) {
+                    case 0:
+                        startActivity(new Intent(MainActivity.this,Activity_1.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(MainActivity.this,Activity_2.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(MainActivity.this,Activity_3.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(MainActivity.this,Activity_4.class));
+                        break;
+                    case 4:
+                        startActivity(new Intent(MainActivity.this,Activity_5.class));
+                        break;
+                }
+            }
+        });
         imageSlideshow.commit();
     }
 

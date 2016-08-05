@@ -186,6 +186,19 @@ public class ImageSlideshow extends FrameLayout {
         }
     };
 
+    // 创建监听器接口
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    // 声明监听器
+    private OnItemClickListener onItemClickListener;
+
+    // 提供设置监听器的公共方法
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        onItemClickListener = listener;
+    }
+
     class ImageTitlePagerAdapter extends PagerAdapter {
         @Override
         public int getCount() {
@@ -198,9 +211,17 @@ public class ImageSlideshow extends FrameLayout {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            container.addView(viewList.get(position));
-            return viewList.get(position);
+        public Object instantiateItem(ViewGroup container, final int position) {
+            View view = viewList.get(position);
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 注意：位置是position-1
+                    onItemClickListener.onItemClick(v, position - 1);
+                }
+            });
+            container.addView(view);
+            return view;
         }
 
         @Override
