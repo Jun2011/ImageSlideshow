@@ -1,4 +1,5 @@
 # ImageSlideshow
+ImageSlideshow是一个自定义的图片轮播控件
 
 ### 运行效果
 ![](https://github.com/Jun2011/ImageSlideshow/raw/master/images/image.gif)
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         // 初始化数据
         initData();
 
-        // 为ImageSlideshow设置数据
+        // 设置ImageSlideshow
         imageSlideshow.setDotSpace(12);
         imageSlideshow.setDotSize(12);
         imageSlideshow.setDelay(3000);
