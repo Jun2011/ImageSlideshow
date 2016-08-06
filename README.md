@@ -10,6 +10,9 @@ ImageSlideshow是一个自定义的图片轮播控件
 - 3）手指拖拽图片时暂停自动轮播，松开后继续自动轮播；
 - 4）含动画效果的小圆点指示器。
 
+具体的实现方法请看我的博文
+[使用ViewPager实现图片轮播](http://www.jianshu.com/p/c083aa9ddd83)
+
 ### 相关方法
 - 1、传入数据
  - addImageUrl(String imageUrl)：只传入图片
