@@ -1,8 +1,8 @@
 # ImageSlideshow
-ImageSlideshow是一个自定义的图片轮播控件
+一个自定义的图片轮播控件
 
 ### 运行效果
-![](https://github.com/Jun2011/ImageSlideshow/raw/master/images/image.gif)
+![](https://github.com/Jun2011/ImageSlideshow/raw/master/images/img_show.gif)
 
 ### 实现功能
 - 1）自动播放；
@@ -13,7 +13,7 @@ ImageSlideshow是一个自定义的图片轮播控件
 具体的实现方法请看我的博文
 [使用ViewPager实现图片轮播](http://www.jianshu.com/p/c083aa9ddd83)
 
-### 相关方法
+### 使用方法
 - 1、传入数据
  - addImageUrl(String imageUrl)：只传入图片
  - addImageTitle(String imageUrl, String title)：传入图片和标题
